@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px 30px;
+  padding: 30px;
   background: #fff;
   border-right: 1px solid #eee;
   display: flex;
@@ -55,7 +55,7 @@ export const WeatherContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
+    margin: 50px 0;
   }
 `;
 
@@ -68,9 +68,8 @@ export const Date = styled.p`
 `;
 
 export const WeatherAnimation = styled.div`
-  width: 200px;
-  height: 200px;
-  background: #666;
+  width: 220px;
+  height: 220px;
   margin: 20px 0;
 
   @media(max-width: 768px){
