@@ -7,17 +7,17 @@ import { useWeather } from '../../hooks/weather';
 import * as S from './styles';
 
 const CardWind: React.FC = () => {
-  const { weather } = useWeather();
+  const { selectedForecast } = useWeather();
 
   return (
     <Card title="Wind speed">
       <S.Container>
         <p>
-          {weather.wind.speed}
+          {selectedForecast.wind_speed}
           <span>km/h</span>
         </p>
         <span>
-          {weather.wind.degree}
+          {selectedForecast.wind_deg}
           °
         </span>
       </S.Container>

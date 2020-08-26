@@ -23,6 +23,6 @@ export default createGlobalStyle`
 
   #root{
     margin: 0 auto;
-    max-width: 1110px;
+    max-width: 1200px;
   }
 `;

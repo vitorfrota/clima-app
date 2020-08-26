@@ -7,16 +7,16 @@ import { useWeather } from '../../hooks/weather';
 import * as S from './styles';
 
 const CardHumidity: React.FC = () => {
-  const { weather } = useWeather();
+  const { selectedForecast } = useWeather();
 
   return (
     <Card title="Humidity">
       <S.Container>
         <p>
-          {weather.humidity}
+          {selectedForecast.humidity}
           <span>%</span>
         </p>
-        <S.Measurer percentage={weather.humidity}>
+        <S.Measurer percentage={selectedForecast.humidity}>
           <div className="indicator" />
         </S.Measurer>
       </S.Container>

@@ -6,19 +6,19 @@ import { useWeather } from '../../hooks/weather';
 
 import * as S from './styles';
 
-const CardVisibility: React.FC = () => {
-  const { weather } = useWeather();
+const CardCloudiness: React.FC = () => {
+  const { selectedForecast } = useWeather();
 
   return (
-    <Card title="Visibility">
+    <Card title="Cloudiness">
       <S.Container>
         <p>
-          {weather.visibility}
-          <span>km</span>
+          {selectedForecast.clouds}
+          <span>%</span>
         </p>
       </S.Container>
     </Card>
   );
 };
 
-export default CardVisibility;
+export default CardCloudiness;

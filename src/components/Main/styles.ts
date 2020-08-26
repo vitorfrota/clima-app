@@ -9,7 +9,8 @@ export const Container = styled.div`
   align-items: baseline;
 
   h1{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    color: #666;
   }
 `;
 

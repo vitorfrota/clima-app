@@ -8,7 +8,7 @@ import { useWeather } from '../../hooks/weather';
 import * as S from './styles';
 
 const CardSunrise: React.FC = () => {
-  const { weather } = useWeather();
+  const { selectedForecast } = useWeather();
 
   return (
     <Card title="Sunrise & Sunset">
@@ -17,13 +17,13 @@ const CardSunrise: React.FC = () => {
           <div className="sun">
             <FiArrowUp />
           </div>
-          <span>{weather.sunrise}</span>
+          <span>{selectedForecast.sunrise}</span>
         </S.Hour>
         <S.Hour>
           <div className="sun">
             <FiArrowDown />
           </div>
-          <span>{weather.sunset}</span>
+          <span>{selectedForecast.sunset}</span>
         </S.Hour>
       </S.Container>
     </Card>

@@ -2,81 +2,92 @@ import React, {
   createContext, useCallback, useState, useContext,
 } from 'react';
 import { format, fromUnixTime } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
 
 import api from '../services/api';
 
 import convertDegree from '../utils/convertDegree';
 
-interface Weather {
-  location: string;
+interface ForecastData {
+  id: number;
+  date: number;
+  sunrise: string;
+  sunset: string;
+  humidity: number;
+  wind_speed: number;
+  wind_deg: number;
   icon_id: string;
   temp: number;
   description: string;
   feels_like: number;
-  date: string;
   temp_min: number;
   temp_max: number;
-  humidity: number;
-  wind: {
-    speed: number;
-    degree: number;
-  };
-  sunrise: string;
-  sunset: string;
-  visibility: number;
+  clouds: number;
   uvi: number;
   pressure: number;
 }
 
 interface WeatherContextData {
-  weather: Weather;
+  selectedForecast: ForecastData;
+  forecastData: ForecastData[];
+  location: string;
   loadWeatherData(): Promise<void>;
+  handleChangeForecastDay(id: number): void;
 }
 
 const WeatherContext = createContext<WeatherContextData>({} as WeatherContextData);
 
 const WeatherProvider: React.FC = ({ children }) => {
-  const [weather, setWeather] = useState({} as Weather);
+  const [location, setLocation] = useState('');
+  const [forecastData, setForecastData] = useState<ForecastData[]>([]);
+  const [selectedForecast, setSelectedForecast] = useState({} as ForecastData);
 
   const loadWeatherData = useCallback(async () => {
     try {
-      const { data } = await api.get('954fa5b0-48f8-4547-850d-9331631a1e6a');
-      console.log(data);
+      const { data } = await api.get('8aa6036c-06e0-4838-a86f-7d691b32388e');
 
-      const dataFormatted: Weather = {
-        location: `${data.name}, ${data.sys.country}`,
-        icon_id: data.weather[0].icon,
-        temp: convertDegree(data.main.temp, 'celsius'),
-        description: data.weather[0].description,
-        feels_like: convertDegree(data.main.feels_like, 'celsius'),
-        date: format(fromUnixTime(data.dt), "dd 'de' MMMM 'de' yyyy", {
-          locale: ptBR,
-        }),
-        temp_min: convertDegree(data.main.temp_min, 'celsius'),
-        temp_max: convertDegree(data.main.temp_max, 'celsius'),
-        humidity: data.main.humidity,
-        wind: {
-          speed: data.wind.speed,
-          degree: data.wind.deg,
-        },
-        sunrise: format(fromUnixTime(data.sys.sunrise), 'p'),
-        sunset: format(fromUnixTime(data.sys.sunset), 'p'),
-        visibility: data.visibility / 1000,
-        uvi: 1,
-        pressure: data.main.pressure,
-      };
+      setLocation('Manaus, BR');
 
-      setWeather(dataFormatted);
+      const dataFormatted = data.daily.slice(0, 7).map((item: any) => ({
+        id: item.dt,
+        date: item.dt,
+        icon_id: item.weather[0].icon,
+        description: item.weather[0].description,
+        temp: convertDegree(item.temp.day, 'celsius'),
+        temp_min: convertDegree(item.temp.min, 'celsius'),
+        temp_max: convertDegree(item.temp.max, 'celsius'),
+        feels_like: convertDegree(item.feels_like.day, 'celsius'),
+        sunrise: format(fromUnixTime(item.sunrise), 'p'),
+        sunset: format(fromUnixTime(item.sunset), 'p'),
+        wind_speed: item.wind_speed,
+        wind_deg: item.wind_deg,
+        uvi: item.uvi,
+        pressure: item.pressure,
+        humidity: item.humidity,
+        clouds: item.clouds,
+      }));
+
+      setForecastData(dataFormatted);
+      setSelectedForecast(dataFormatted[0]);
     } catch (e) {
       console.log(`${e}Ocorreu um erro ao tentar buscar os dados!`);
     }
   }, []);
 
+  const handleChangeForecastDay = useCallback((id: number) => {
+    const forecastDay = forecastData.find((item) => item.id === id);
+
+    if (forecastDay) {
+      setSelectedForecast(forecastDay);
+    }
+  }, [forecastData]);
+
   return (
     <WeatherContext.Provider
       value={{
-        weather,
+        location,
+        forecastData,
+        selectedForecast,
+        handleChangeForecastDay,
         loadWeatherData,
       }}
     >

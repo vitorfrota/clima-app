@@ -7,12 +7,12 @@ import { useWeather } from '../../hooks/weather';
 import * as S from './styles';
 
 const CardUV: React.FC = () => {
-  const { weather } = useWeather();
+  const { selectedForecast } = useWeather();
 
   return (
     <Card title="UV Index">
       <S.Container>
-        <p>{weather.uvi}</p>
+        <p>{selectedForecast.uvi}</p>
       </S.Container>
     </Card>
   );

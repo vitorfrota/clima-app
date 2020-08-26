@@ -1,51 +1,57 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Lottie from 'lottie-react-web';
+import { format, fromUnixTime } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import {
   FiNavigation, FiArrowUp, FiArrowDown, FiThermometer,
 } from 'react-icons/fi';
 
-import animations from '../../assets/weather_animations';
+import getAnimation from '../../assets/weather_animations';
 
 import { useWeather } from '../../hooks/weather';
 
 import * as S from './styles';
 
-function getAnimation(id: string): JSON {
-  const key = `_${id}`;
-
-  return animations[key];
-}
-
 const Sidebar: React.FC = () => {
-  const { weather } = useWeather();
+  const { selectedForecast, location } = useWeather();
+
+  const dateFormatted = useMemo(() => {
+    if (selectedForecast.date) {
+      const date = format(fromUnixTime(selectedForecast.date), "dd 'de' MMMM 'de' yyyy", {
+        locale: ptBR,
+      });
+
+      return date;
+    }
+  }, [selectedForecast]);
 
   return (
     <S.Container>
       <S.Location>
         <FiNavigation />
         <p>
-          {weather.location}
+          {location}
         </p>
       </S.Location>
       <S.WeatherContainer>
         <div className="date">
           <strong>Hoje,</strong>
           {' '}
-          {weather.date}
+          {dateFormatted}
         </div>
         <S.WeatherAnimation>
           <Lottie
             options={{
-              animationData: getAnimation(weather.icon_id),
+              animationData: getAnimation(selectedForecast.icon_id),
             }}
           />
         </S.WeatherAnimation>
         <S.WeatherData>
           <p>
-            {weather.temp}
+            {selectedForecast.temp}
             °
           </p>
-          <span>{weather.description}</span>
+          <span>{selectedForecast.description}</span>
         </S.WeatherData>
       </S.WeatherContainer>
       <S.WeatherAdditional>
@@ -55,7 +61,7 @@ const Sidebar: React.FC = () => {
             <p>Min</p>
           </header>
           <p>
-            {weather.temp_min}
+            {selectedForecast.temp_min}
             °
           </p>
         </S.WeatherAdditionalItem>
@@ -65,7 +71,7 @@ const Sidebar: React.FC = () => {
             <p>Max</p>
           </header>
           <p>
-            {weather.temp_max}
+            {selectedForecast.temp_max}
             °
           </p>
         </S.WeatherAdditionalItem>
@@ -75,7 +81,7 @@ const Sidebar: React.FC = () => {
             <p>Feel</p>
           </header>
           <p>
-            {weather.feels_like}
+            {selectedForecast.feels_like}
             °
           </p>
         </S.WeatherAdditionalItem>
