@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: 100%;
   padding: 20px 30px;
   background: #fff;
+  border-right: 1px solid #eee;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -69,7 +70,7 @@ export const Date = styled.p`
 export const WeatherAnimation = styled.div`
   width: 200px;
   height: 200px;
-  border: 1px solid red;
+  background: #666;
   margin: 20px 0;
 
   @media(max-width: 768px){

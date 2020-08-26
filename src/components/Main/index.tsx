@@ -1,10 +1,28 @@
 import React from 'react';
 
+import CardAir from '../CardAir';
+import CardHumidity from '../CardHumidity';
+import CardSunrise from '../CardSunrise';
+import CardUV from '../CardUV';
+import CardVisibility from '../CardVisibility';
+import CardWind from '../CardWind';
+
 import * as S from './styles';
+import Forecast from '../Forecast';
 
 const Main: React.FC = () => (
   <S.Container>
-    <h1>Main</h1>
+    <h1>Today highlights</h1>
+    <S.CardsGroup>
+      <CardUV />
+      <CardHumidity />
+      <CardWind />
+      <CardVisibility />
+      <CardSunrise />
+      <CardAir />
+    </S.CardsGroup>
+    <h1>Forecast</h1>
+    <Forecast />
   </S.Container>
 );
 
