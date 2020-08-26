@@ -1,31 +1,82 @@
 import React, {
   createContext, useCallback, useState, useContext,
 } from 'react';
+import { format, fromUnixTime } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
 import api from '../services/api';
 
+import convertDegree from '../utils/convertDegree';
+
+interface Weather {
+  location: string;
+  icon_id: string;
+  temp: number;
+  description: string;
+  feels_like: number;
+  date: string;
+  temp_min: number;
+  temp_max: number;
+  humidity: number;
+  wind: {
+    speed: number;
+    degree: number;
+  };
+  sunrise: string;
+  sunset: string;
+  visibility: number;
+  uvi: number;
+  pressure: number;
+}
+
 interface WeatherContextData {
-  data: any;
+  weather: Weather;
   loadWeatherData(): Promise<void>;
 }
 
 const WeatherContext = createContext<WeatherContextData>({} as WeatherContextData);
 
 const WeatherProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState({});
+  const [weather, setWeather] = useState({} as Weather);
 
   const loadWeatherData = useCallback(async () => {
     try {
-      const response = await api.get('47c03472-0f65-46ae-9e7d-4adb875a795a');
-      setData(response.data);
+      const { data } = await api.get('954fa5b0-48f8-4547-850d-9331631a1e6a');
+      console.log(data);
+
+      const dataFormatted: Weather = {
+        location: `${data.name}, ${data.sys.country}`,
+        icon_id: data.weather[0].icon,
+        temp: convertDegree(data.main.temp, 'celsius'),
+        description: data.weather[0].description,
+        feels_like: convertDegree(data.main.feels_like, 'celsius'),
+        date: format(fromUnixTime(data.dt), "dd 'de' MMMM 'de' yyyy", {
+          locale: ptBR,
+        }),
+        temp_min: convertDegree(data.main.temp_min, 'celsius'),
+        temp_max: convertDegree(data.main.temp_max, 'celsius'),
+        humidity: data.main.humidity,
+        wind: {
+          speed: data.wind.speed,
+          degree: data.wind.deg,
+        },
+        sunrise: format(fromUnixTime(data.sys.sunrise), 'p'),
+        sunset: format(fromUnixTime(data.sys.sunset), 'p'),
+        visibility: data.visibility / 1000,
+        uvi: 1,
+        pressure: data.main.pressure,
+      };
+
+      setWeather(dataFormatted);
     } catch (e) {
-      console.log('Ocorreu um erro ao tentar buscar os dados!');
+      console.log(`${e}Ocorreu um erro ao tentar buscar os dados!`);
     }
   }, []);
 
   return (
     <WeatherContext.Provider
       value={{
-        data,
+        weather,
         loadWeatherData,
       }}
     >

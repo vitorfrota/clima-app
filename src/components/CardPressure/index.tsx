@@ -6,19 +6,19 @@ import { useWeather } from '../../hooks/weather';
 
 import * as S from './styles';
 
-const CardHumidity: React.FC = () => {
+const CardPressure: React.FC = () => {
   const { weather } = useWeather();
 
   return (
-    <Card title="Humidity">
+    <Card title="Pressure">
       <>
         <p>
-          {weather.humidity}
-          %
+          {weather.pressure}
+          hPa
         </p>
       </>
     </Card>
   );
 };
 
-export default CardHumidity;
+export default CardPressure;

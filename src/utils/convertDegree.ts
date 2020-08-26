@@ -1,12 +1,18 @@
 const convertDegree = (value: number, to: string): number => {
+  let valueFormatted = 0;
+
   switch (to) {
     case 'celsius':
-      return value - 273.15;
+      valueFormatted = value - 273.15;
+      break;
     case 'fahrenheit':
-      return (value - 273.15) * (9 / 5) + 32;
+      valueFormatted = (value - 273.15) * (9 / 5) + 32;
+      break;
     default:
-      return value;
+      return valueFormatted;
   }
+
+  return parseFloat(valueFormatted.toFixed(0));
 };
 
 export default convertDegree;

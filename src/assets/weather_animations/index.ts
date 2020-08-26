@@ -3,7 +3,11 @@ import storm from './storm.json';
 import sunny from './sunny.json';
 import windy from './windy.json';
 
-const animations = {
+type Tanimation = {
+  [key: string] : any;
+}
+
+const animations: Tanimation = {
   _13d: snow,
   _01d: sunny,
   _11d: storm,

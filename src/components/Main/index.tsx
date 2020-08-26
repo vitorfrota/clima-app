@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CardAir from '../CardAir';
+import CardPressure from '../CardPressure';
 import CardHumidity from '../CardHumidity';
 import CardSunrise from '../CardSunrise';
 import CardUV from '../CardUV';
@@ -19,7 +19,7 @@ const Main: React.FC = () => (
       <CardWind />
       <CardVisibility />
       <CardSunrise />
-      <CardAir />
+      <CardPressure />
     </S.CardsGroup>
     <h1>Forecast</h1>
     <Forecast />

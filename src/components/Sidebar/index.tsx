@@ -7,49 +7,45 @@ import {
 import animations from '../../assets/weather_animations';
 
 import { useWeather } from '../../hooks/weather';
-import convertDegree from '../../utils/convertDegree';
 
 import * as S from './styles';
 
-function getAnimation(id: string = '13d'): any {
-  const key = '_11d';
+function getAnimation(id: string): JSON {
+  const key = `_${id}`;
 
   return animations[key];
 }
 
 const Sidebar: React.FC = () => {
-  const { data: weather } = useWeather();
+  const { weather } = useWeather();
 
   return (
     <S.Container>
       <S.Location>
         <FiNavigation />
         <p>
-          {weather.name}
-          ,
-          {' '}
-          {weather.sys.country}
+          {weather.location}
         </p>
       </S.Location>
       <S.WeatherContainer>
         <div className="date">
           <strong>Hoje,</strong>
           {' '}
-          20 de agosto de 2020.
+          {weather.date}
         </div>
         <S.WeatherAnimation>
           <Lottie
             options={{
-              animationData: getAnimation('13d'),
+              animationData: getAnimation(weather.icon_id),
             }}
           />
         </S.WeatherAnimation>
         <S.WeatherData>
           <p>
-            {convertDegree(weather.main.temp, 'celsius').toFixed(0)}
+            {weather.temp}
             °
           </p>
-          <span>{weather.weather[0].description}</span>
+          <span>{weather.description}</span>
         </S.WeatherData>
       </S.WeatherContainer>
       <S.WeatherAdditional>
@@ -58,21 +54,30 @@ const Sidebar: React.FC = () => {
             <FiArrowDown />
             <p>Min</p>
           </header>
-          <p>{weather.main.temp_min}</p>
+          <p>
+            {weather.temp_min}
+            °
+          </p>
         </S.WeatherAdditionalItem>
         <S.WeatherAdditionalItem>
           <header>
             <FiArrowUp />
             <p>Max</p>
           </header>
-          <p>{weather.main.temp_max}</p>
+          <p>
+            {weather.temp_max}
+            °
+          </p>
         </S.WeatherAdditionalItem>
         <S.WeatherAdditionalItem>
           <header>
             <FiThermometer />
             <p>Feel</p>
           </header>
-          <p>{weather.main.feels_like}</p>
+          <p>
+            {weather.feels_like}
+            °
+          </p>
         </S.WeatherAdditionalItem>
       </S.WeatherAdditional>
     </S.Container>

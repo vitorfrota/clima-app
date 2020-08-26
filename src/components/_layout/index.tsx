@@ -8,7 +8,7 @@ import { useWeather } from '../../hooks/weather';
 import * as S from './styles';
 
 const Layout: React.FC = () => {
-  const { loadWeatherData, data } = useWeather();
+  const { loadWeatherData, weather } = useWeather();
 
   useEffect(() => {
     loadWeatherData();
@@ -17,7 +17,7 @@ const Layout: React.FC = () => {
   return (
     <S.Container>
       {
-      data.weather && (
+      weather.wind && (
         <>
           <Sidebar />
           <Main />

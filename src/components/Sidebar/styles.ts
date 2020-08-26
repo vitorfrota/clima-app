@@ -101,12 +101,6 @@ export const WeatherData = styled.div`
 export const WeatherAdditional = styled.ul`
   list-style: none;
   display: flex;
-
-  @media(max-width: 768px){
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 8px;
-  }
 `;
 
 export const WeatherAdditionalItem = styled.li`
