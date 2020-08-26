@@ -8,14 +8,23 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body{
-    background: #FFF;
-    color: #000;
+    background: #0185FF;
+    color: #333;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto', sans-serif;
   }
   button {
     cursor: pointer;
   }
+
+  h1, h2, h3{
+    font-size: 1.5em;
+  }
+
   #root{
     margin: 0 auto;
+    max-width: 1110px;
+    height: 100vh;
+    overflow-y: hidden;
   }
 `;

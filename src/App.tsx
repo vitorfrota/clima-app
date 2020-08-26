@@ -1,10 +1,12 @@
 import React from 'react';
 
+import Layout from './components/_layout';
+
 import GlobalStyle from './styles/globalStyle';
 
 const App: React.FC = () => (
   <>
-    <h1>Olá :)</h1>
+    <Layout />
     <GlobalStyle />
   </>
 );
