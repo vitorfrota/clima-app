@@ -11,16 +11,16 @@ const CardWind: React.FC = () => {
 
   return (
     <Card title="Wind speed">
-      <>
+      <S.Container>
         <p>
           {weather.wind.speed}
-          km/h
+          <span>km/h</span>
         </p>
         <span>
           {weather.wind.degree}
           °
         </span>
-      </>
+      </S.Container>
     </Card>
   );
 };

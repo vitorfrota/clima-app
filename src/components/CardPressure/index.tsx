@@ -11,12 +11,12 @@ const CardPressure: React.FC = () => {
 
   return (
     <Card title="Pressure">
-      <>
+      <S.Container>
         <p>
           {weather.pressure}
-          hPa
+          <span>hPa</span>
         </p>
-      </>
+      </S.Container>
     </Card>
   );
 };

@@ -23,10 +23,15 @@ export const Content = styled.div`
   p{
     font-size: 2.5rem;
     color: #333;
+
+    span{
+      font-size: 1.8rem;
+      color: #333;
+    }
   }
 
   span{
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #666;
   }
 `;

@@ -11,12 +11,12 @@ const CardVisibility: React.FC = () => {
 
   return (
     <Card title="Visibility">
-      <>
+      <S.Container>
         <p>
           {weather.visibility}
-          km
+          <span>km</span>
         </p>
-      </>
+      </S.Container>
     </Card>
   );
 };

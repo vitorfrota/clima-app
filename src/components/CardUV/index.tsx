@@ -11,9 +11,9 @@ const CardUV: React.FC = () => {
 
   return (
     <Card title="UV Index">
-      <>
+      <S.Container>
         <p>{weather.uvi}</p>
-      </>
+      </S.Container>
     </Card>
   );
 };

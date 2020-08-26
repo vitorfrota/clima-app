@@ -11,12 +11,15 @@ const CardHumidity: React.FC = () => {
 
   return (
     <Card title="Humidity">
-      <>
+      <S.Container>
         <p>
           {weather.humidity}
-          %
+          <span>%</span>
         </p>
-      </>
+        <S.Measurer percentage={weather.humidity}>
+          <div className="indicator" />
+        </S.Measurer>
+      </S.Container>
     </Card>
   );
 };
