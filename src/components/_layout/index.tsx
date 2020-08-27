@@ -17,7 +17,7 @@ const Layout: React.FC = () => {
   return (
     <S.Container>
       {
-      forecastData && (
+      forecastData.length > 0 && (
         <>
           <Sidebar />
           <Main />

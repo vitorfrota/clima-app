@@ -25,6 +25,15 @@ const Sidebar: React.FC = () => {
     }
   }, [selectedForecast]);
 
+  const dayFormatted = useMemo(() => {
+    if (selectedForecast.date) {
+      const date = format(fromUnixTime(selectedForecast.date), 'eeee', {
+        locale: ptBR,
+      });
+      return date;
+    }
+  }, [selectedForecast]);
+
   return (
     <S.Container>
       <S.Location>
@@ -35,7 +44,10 @@ const Sidebar: React.FC = () => {
       </S.Location>
       <S.WeatherContainer>
         <div className="date">
-          <strong>Hoje,</strong>
+          <strong>
+            {dayFormatted}
+            ,
+          </strong>
           {' '}
           {dateFormatted}
         </div>

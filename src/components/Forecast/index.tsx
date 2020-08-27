@@ -12,12 +12,13 @@ const Forecast: React.FC = () => {
 
   return (
     <S.Container>
+      <h1>Week Forecast</h1>
       <S.ListForecast>
         {
         forecastData.map((day: any) => (
           <S.ForecastItem
             key={day.id}
-            selected={selectedForecast.id === day.id}
+            className={selectedForecast.id === day.id ? 'selected' : ''}
             onClick={() => handleChangeForecastDay(day.id)}
           >
             <h3>{format(fromUnixTime(day.date), 'dd/MM')}</h3>

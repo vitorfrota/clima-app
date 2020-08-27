@@ -12,6 +12,7 @@ import Forecast from '../Forecast';
 
 const Main: React.FC = () => (
   <S.Container>
+    <Forecast />
     <h1>Highlights</h1>
     <S.CardsGroup>
       <CardUV />
@@ -21,8 +22,6 @@ const Main: React.FC = () => (
       <CardSunrise />
       <CardPressure />
     </S.CardsGroup>
-    <h1>Week Forecast</h1>
-    <Forecast />
   </S.Container>
 );
 

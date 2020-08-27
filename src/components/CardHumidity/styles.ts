@@ -25,5 +25,6 @@ export const Measurer = styled.div<MeasurerProps>`
     width: 100%;
     height: ${(props) => props.percentage}%;
     background: #41f8b3;
+    transition: all 100ms linear;
   }
 `;

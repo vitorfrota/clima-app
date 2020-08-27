@@ -13,6 +13,10 @@ const CardUV: React.FC = () => {
     <Card title="UV Index">
       <S.Container>
         <p>{selectedForecast.uvi}</p>
+        {/* <S.MeasurerContainer>
+          <S.Measurer />
+          <div className="needle" />
+        </S.MeasurerContainer> */}
       </S.Container>
     </Card>
   );

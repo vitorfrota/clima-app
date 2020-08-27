@@ -70,7 +70,7 @@ export const Date = styled.p`
 export const WeatherAnimation = styled.div`
   width: 220px;
   height: 220px;
-  margin: 20px 0;
+  margin: 40px 0;
 
   @media(max-width: 768px){
     width: 130px;
