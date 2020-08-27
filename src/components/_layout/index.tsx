@@ -11,7 +11,11 @@ const Layout: React.FC = () => {
   const { loadWeatherData, forecastData } = useWeather();
 
   useEffect(() => {
-    loadWeatherData();
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      loadWeatherData(latitude, longitude);
+    });
   }, [loadWeatherData]);
 
   return (

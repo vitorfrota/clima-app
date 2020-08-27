@@ -16,10 +16,14 @@ const CardWind: React.FC = () => {
           {selectedForecast.wind_speed}
           <span>km/h</span>
         </p>
-        <span>
+        <S.Compass>
+          <S.CompassIndicator degree={selectedForecast.wind_deg} />
+        </S.Compass>
+
+        {/* <span>
           {selectedForecast.wind_deg}
           °
-        </span>
+        </span> */}
       </S.Container>
     </Card>
   );

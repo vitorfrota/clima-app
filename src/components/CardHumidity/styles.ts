@@ -14,7 +14,7 @@ export const Container = styled.div`
 export const Measurer = styled.div<MeasurerProps>`
   height: 100%;
   width: 10px;
-  background: #f5f5f5;
+  background: #f1f1f1;
   border-radius: 15px;
   position: relative;
 

@@ -30,7 +30,7 @@ interface WeatherContextData {
   selectedForecast: ForecastData;
   forecastData: ForecastData[];
   location: string;
-  loadWeatherData(): Promise<void>;
+  loadWeatherData(latitude: number, longitude: number): Promise<void>;
   handleChangeForecastDay(id: number): void;
 }
 
@@ -41,11 +41,19 @@ const WeatherProvider: React.FC = ({ children }) => {
   const [forecastData, setForecastData] = useState<ForecastData[]>([]);
   const [selectedForecast, setSelectedForecast] = useState({} as ForecastData);
 
-  const loadWeatherData = useCallback(async () => {
+  const loadWeatherData = useCallback(async (latitude: number, longitude: number) => {
     try {
-      const { data } = await api.get('8aa6036c-06e0-4838-a86f-7d691b32388e');
+      const { data } = await api.get(
+        `onecall?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_API_KEY}`,
+      );
 
-      setLocation('Manaus, BR');
+      const { data: dataWeather } = await api.get(
+        `weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_API_KEY}`,
+      );
+
+      const locationFormatted = `${dataWeather.name}, ${dataWeather.sys.country}`;
+
+      setLocation(locationFormatted);
 
       const dataFormatted = data.daily.slice(0, 7).map((item: any) => ({
         id: item.dt,
