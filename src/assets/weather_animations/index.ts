@@ -1,3 +1,5 @@
+import clouds from './clouds.json';
+import mist from './mist.json';
 import rain from './rain.json';
 import snow from './snow.json';
 import storm from './storm.json';
@@ -9,11 +11,15 @@ type Tanimation = {
 }
 
 const animations: Tanimation = {
+  _01d: sunny,
+  _02d: clouds,
+  _03d: windy,
+  _04d: windy,
+  _09d: rain,
   _10d: rain,
   _13d: snow,
-  _01d: sunny,
   _11d: storm,
-  _03d: windy,
+  _50d: mist,
 };
 
 function getAnimation(id: string): JSON {

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
+import Message from '../Message';
 import Main from '../Main';
 import Sidebar from '../Sidebar';
 
@@ -21,12 +22,15 @@ const Layout: React.FC = () => {
   return (
     <S.Container>
       {
-      forecastData.length > 0 && (
-        <>
-          <Sidebar />
-          <Main />
-        </>
-      )
+       forecastData.length > 0 ? (
+         <>
+           <Sidebar />
+           <Main />
+         </>
+       )
+         : (
+           <Message />
+         )
 
       }
 

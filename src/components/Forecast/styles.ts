@@ -17,7 +17,7 @@ export const ListForecast = styled.ul`
 
   .selected {
     transform: scale(1.1);
-    box-shadow: 0 5px 12px rgba(200,200,200,0.15), 0 7px 12px rgba(200,200,200,0.05);
+    box-shadow: 0 3px 12px rgba(150,150,150,0.15), 0 4px 12px rgba(150,150,150,0.05);
   }
 
   @media(max-width: 540px){

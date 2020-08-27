@@ -25,4 +25,14 @@ export default createGlobalStyle`
     margin: 0 auto;
     max-width: 1200px;
   }
+
+  @media(min-width: 540px){
+
+    #root{
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+  }
 `;
